@@ -1,0 +1,80 @@
+﻿<Application x:Class="_2022MuyGroundStation.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:_2022MuyGroundStation"
+             StartupUri="Window2.xaml">
+    <Application.Resources>
+
+        <Style x:Key="TelemetryLabels" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#FFF7F7E8" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Margin" Value="3 9 0 0"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="MinWidth" Value="100"/>
+        </Style>
+
+        <Style x:Key="graphBorder" TargetType="Border">
+            <Setter Property="Margin" Value="4 4 4 4"></Setter>
+            <Setter Property="BorderBrush" Value="CadetBlue"></Setter>
+            <Setter Property="BorderThickness" Value="3"></Setter>
+            <Setter Property="CornerRadius" Value="2"></Setter>
+            <Setter Property="Background" Value="#323838"></Setter>
+        </Style>
+
+        <Style x:Key="mapBorder" TargetType="Border">
+            <Setter Property="Margin" Value="4 4 4 4"></Setter>
+            <Setter Property="BorderBrush" Value="#FFE43D3D"></Setter>
+            <Setter Property="BorderThickness" Value="3"></Setter>
+            <Setter Property="CornerRadius" Value="2"></Setter>
+            <Setter Property="Background" Value="#FFE8E8E8"></Setter>
+        </Style>
+
+        <Style x:Key="TelemetryValues" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#46AB5F" />
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Margin" Value="3 9 0 0"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="MinWidth" Value="200"/>
+        </Style>
+
+
+        <Style x:Key="controlButtons" TargetType="Button">
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="FontWeight" Value="Black" />
+            <Setter Property="Foreground" Value="#D6CE17" />
+            <Setter Property="Margin" Value="2 4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border BorderThickness="2" 
+                                    CornerRadius="5"
+                                    Padding="3"
+                                    x:Name="ButtonBorder"
+                                    Background="{TemplateBinding Background}"
+                                >
+                                <Border.BorderBrush>
+                                    <SolidColorBrush x:Name="ButtonBorderBrush" Color="AliceBlue"/>
+                                </Border.BorderBrush>
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#C0C0C0" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        
+
+
+
+    </Application.Resources>
+</Application>

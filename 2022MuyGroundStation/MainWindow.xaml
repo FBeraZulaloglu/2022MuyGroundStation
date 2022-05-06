@@ -1,0 +1,25 @@
+﻿<Window x:Class="_2022MuyGroundStation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_2022MuyGroundStation"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TextBox x:Name="host_ip" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="75,90,0,0" Height="28" Width="61" Text="127.0.0.1"/>
+        <Button x:Name="connectServer" Content="Connect" HorizontalAlignment="Left" Margin="162,90,0,0" VerticalAlignment="Top" Width="104" Height="56" Click="ConnectServer"/>
+        <TextBox x:Name="status" Background="Black" Foreground="Green" HorizontalAlignment="Left" Margin="22,184,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="62" Width="315"/>
+        <TextBox x:Name="allDataFromServer_txt" Background="Black" Foreground="Green" HorizontalAlignment="Left" Margin="373,53,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="305" Width="411"/>
+        <TextBox x:Name="host_port" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="75,123,0,0" Height="28" Width="61" Text="8910"/>
+        <Label Content="Host:" HorizontalAlignment="Left" Margin="22,90,0,0" VerticalAlignment="Top" Height="28" Width="53"/>
+        <Label Content="Port:" HorizontalAlignment="Left" Margin="22,118,0,0" VerticalAlignment="Top" Height="28" Width="37"/>
+        <Button Content="Send" HorizontalAlignment="Left" Margin="271,304,0,0" VerticalAlignment="Top" Width="66" Height="54" Click="SendData"/>
+        <Label Content="DATA FROM SATELLITE" HorizontalAlignment="Left" Margin="458,10,0,0" VerticalAlignment="Top" Height="32" Width="232" FontWeight="Bold" FontSize="20"/>
+        <TextBox x:Name="sendData_txt" Background="Black" Foreground="Green" HorizontalAlignment="Left" Margin="22,304,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="54" Width="244"/>
+        <Label Content="STATUS OF CONNECTION" HorizontalAlignment="Left" Margin="22,151,0,0" VerticalAlignment="Top" Height="28" Width="244" FontSize="16" FontWeight="Bold"/>
+        <Label Content="SEND DATA TO SATELLITE" HorizontalAlignment="Left" Margin="22,251,0,0" VerticalAlignment="Top" Height="28" Width="244" FontSize="16" FontWeight="Bold"/>
+        <Label Content="CONFIGRATION PANEL" HorizontalAlignment="Left" Margin="22,53,0,0" VerticalAlignment="Top" Height="32" Width="244" FontSize="16" FontWeight="Bold"/>
+
+    </Grid>
+</Window>

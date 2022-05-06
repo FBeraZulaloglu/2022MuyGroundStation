@@ -1,0 +1,289 @@
+﻿<Window x:Class="_2022MuyGroundStation.Window2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:gmaps="clr-namespace:GMap.NET.WindowsForms;assembly=GMap.NET.WindowsForms"
+        xmlns:model="http://helix-toolkit.org/wpf"
+        xmlns:chart="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization" 
+        xmlns:local="clr-namespace:_2022MuyGroundStation"
+        mc:Ignorable="d"
+        
+        Title="Window2" Height="1080" Width="1920">
+    <Grid Margin="0,0,0,0" Visibility="Visible" IsHitTestVisible="True" Background="#FF111010">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid >
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="32" FontWeight="Black"  Foreground="#C71C11" Margin="0 -2 0 0">TALIA</Label>
+            <Label VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="32" FontWeight="Black"  Foreground="#C71C11" Margin="0 28 0 0">AEROSPACE</Label>
+            <CheckBox x:Name="serverConneciton"
+                      HorizontalAlignment="Left" 
+                      Margin="0 0 0 42"
+                      IsChecked="True"
+                      Background="#FFBB8484" 
+                      FontSize="15" 
+                      FontWeight="Bold"
+                      VerticalAlignment="Bottom"
+                      Foreground="Pink"
+                      IsHitTestVisible="False"
+                      >SERVER CONNECTED</CheckBox>
+            <Image Source="images/talialogo.png" Width="150" Height="150" HorizontalAlignment="Right" RenderTransformOrigin=".5,.5">
+
+                <Image.RenderTransform>
+                    <RotateTransform x:Name="AnimatedRotateTransform" Angle="0" />
+                </Image.RenderTransform>
+
+                <Image.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard>
+                            <Storyboard RepeatBehavior="Forever">
+                                <DoubleAnimation Storyboard.TargetName="AnimatedRotateTransform" 
+                                                 Storyboard.TargetProperty="Angle" 
+                                                 By="0"        
+                                                 To="360" 
+                                                 Duration="0:0:3" 
+                                                 FillBehavior="Stop" >
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseInOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Image.Triggers>
+            </Image>
+
+            <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" MinHeight="20" FontSize="20" Foreground="White" Background="PaleVioletRed" MinWidth="100">STATE : BEFORE_LAUNCH</TextBlock>
+
+            <!--    <Label Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="8" Foreground="DarkRed" Margin="0 -7 0 0">CONTAINER</Label>  -->
+            <StackPanel Grid.Row="1" Margin="0 10 0 0" MinHeight="100" MinWidth="100" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TextBlock Style="{StaticResource containerLabels}" >TEAM ID</TextBlock>
+                <TextBlock Style="{StaticResource containerLabels}" >MISSION TIME</TextBlock>
+                <TextBlock Style="{StaticResource containerLabels}" >PACKET COUNT</TextBlock>
+                <TextBlock Style="{StaticResource containerLabels}" >PACKET TYPE</TextBlock>
+                <TextBlock Style="{StaticResource containerLabels}" >MODE</TextBlock>
+                <TextBlock Style="{StaticResource containerLabels}" >SP1 RELEASED</TextBlock>
+                <TextBlock Style="{StaticResource containerLabels}" >SP2_RELEASED</TextBlock>
+                <TextBlock Style="{StaticResource containerLabels}" >ALTITUDE</TextBlock>
+                <TextBlock Style="{StaticResource containerLabels}" >TEMP</TextBlock>
+                
+                
+            </StackPanel>
+            <StackPanel Grid.Row="1" Margin="0 10 0 0" MinHeight="100" MinWidth="100" HorizontalAlignment="Right" VerticalAlignment="Stretch">
+                <TextBox x:Name="teamID"  Style="{StaticResource containerValues}" Text="2155"/>
+                <TextBox x:Name="missionTime"  Style="{StaticResource containerValues}"/>
+                <TextBox x:Name="packetCount"  Style="{StaticResource containerValues}"/>
+                <TextBox x:Name="packetType"  Style="{StaticResource containerValues}"/>
+                <TextBox x:Name="mode"  Style="{StaticResource containerValues}"/>
+                <TextBox x:Name="sp1_released"  Style="{StaticResource containerValues}"/>
+                <TextBox x:Name="sp2_released"  Style="{StaticResource containerValues}"/>
+                <TextBox x:Name="c_altitude"  Style="{StaticResource containerValues}"/>
+                <TextBox x:Name="c_temp"  Style="{StaticResource containerValues}"/>
+                
+            </StackPanel>
+
+            
+
+            <!--    <Label Grid.Row="3" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="9" Foreground="DARKRED" Margin="0 -3 0 0">SCIENCE PAYLOAD2</Label> -->
+            <StackPanel Grid.Row="3" Margin="0 20 0 0">
+                <TextBlock Style="{StaticResource spLabels}" >MISSION TIME</TextBlock>
+                <TextBlock Style="{StaticResource spLabels}" >PACKET COUNT</TextBlock>
+                <TextBlock Style="{StaticResource spLabels}" >PACKET TYPE</TextBlock>
+                <TextBlock Style="{StaticResource spLabels}" >SP2 ALTITUDE</TextBlock>
+                <TextBlock Style="{StaticResource spLabels}" >SP2 TEMP</TextBlock>
+                <TextBlock Style="{StaticResource spLabels}" >SP2 ROTATION RATE</TextBlock>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3" Margin="0 20 0 0" MinHeight="100" MinWidth="100" HorizontalAlignment="Right" VerticalAlignment="Stretch">
+                <TextBox x:Name="missionTime2"  Style="{StaticResource spValues}"/>
+                <TextBox x:Name="packetcount2"  Style="{StaticResource spValues}"/>
+                <TextBox x:Name="packet_type2"  Style="{StaticResource spValues}"/>
+                <TextBox x:Name="sp2_altitude"  Style="{StaticResource spValues}"/>
+                <TextBox x:Name="sp2_temp"  Style="{StaticResource spValues}"/>
+                <TextBox x:Name="sp2_rotation_rate"  Style="{StaticResource spValues}"/>
+
+            </StackPanel>
+        </Grid>
+        <Grid  Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="6*"/>
+
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="sim_enable" Grid.Row="0" Grid.Column="2"
+                        Style="{StaticResource controlButtons}"
+                        Background="#FF023C17"
+                        Click="sim_enable_Click">SIM ENABLE</Button>
+                <Button x:Name="sim_active" Grid.Row="1" Grid.Column="2"
+                        Style="{StaticResource controlButtons}"
+                        Background="#FF6B22B4"
+                        Click="sim_active_Click" >SIM ACTIVE</Button>
+                <Button  x:Name="reset" Grid.Column="3" Grid.Row="0"
+                        Style="{StaticResource controlButtons}"
+                        Background="#FFB4222F"
+                        Click="reset_Click">RESET</Button>
+                <Button x:Name="start" Grid.Column="1" Grid.Row="1" 
+                        Style="{StaticResource controlButtons}" 
+                        Background="#FF185061"
+                        Click="start_Click">START</Button>
+                <Button x:Name="gps" Grid.Row="1"
+                        Style="{StaticResource controlButtons}"
+                        Background="#FF552147"
+                        Click="stop_mqtt_Click" Content="MQTT STOP"/>
+                <Button  x:Name="calibrate" Grid.Row="0" Grid.Column="1"
+                        Style="{StaticResource controlButtons}"
+                        Background="#FFBA20C1"
+                        Click="calibrate_Click">CALIBRATE</Button>
+                <Button x:Name="mqttServer" Grid.Row="0" Grid.Column="0"
+                        Style="{StaticResource controlButtons}"
+                        Background="#FF071229"
+                        Click="start_mqtt_Click" Content="MQTT START"/>
+                <Button  x:Name="test" Grid.Row="1" Grid.Column="3"
+                        Style="{StaticResource controlButtons}"
+                        Background="#FF1C934D"
+                        Click="test_Click">TEST</Button>
+            </Grid>
+
+            <Grid Grid.Row="2" >
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Grid.Row="4" Style="{StaticResource graphBorder}" BorderBrush="#FF901616" BorderThickness="2">
+                    <WindowsFormsHost Initialized="sp1_altitude_graph_initalized">
+                        <chart:Chart  x:Name="altitudeChart1">
+                            <chart:Chart.Series >
+                                <chart:Series x:Name="sp1_altitude_points" ChartType="Spline"/>
+                            </chart:Chart.Series>
+                            <chart:Chart.ChartAreas>
+                                <chart:ChartArea  x:Name="altitudeArea1" />
+                            </chart:Chart.ChartAreas>
+                        </chart:Chart>
+
+                    </WindowsFormsHost>
+                </Border>
+
+                <Border Grid.Column="1" Grid.Row="4" Style="{StaticResource graphBorder}" BorderBrush="#FF901616" BorderThickness="2" Margin="2 2 2 2">
+                    <WindowsFormsHost Initialized="sp1_temp_graph_initalized" >
+                        <chart:Chart  x:Name="tempChart1"  >
+                            <chart:Chart.Series >
+                                <chart:Series x:Name="sp1_temp_points" ChartType="Spline"/>
+                            </chart:Chart.Series>
+                            <chart:Chart.ChartAreas>
+                                <chart:ChartArea x:Name="tempArea1" />
+                            </chart:Chart.ChartAreas>
+                        </chart:Chart>
+
+
+                    </WindowsFormsHost>
+                </Border>
+
+                <Border Grid.Column="2" Grid.Row="4" Style="{StaticResource graphBorder}" BorderBrush="#FF901616" BorderThickness="2" Margin="2 2 2 2">
+                    <WindowsFormsHost Initialized="sp1_rotation_graph_initalized">
+                        <chart:Chart  x:Name="rotationChart1" >
+                            <chart:Chart.Series >
+                                <chart:Series x:Name="sp1_rotation_points" ChartType="Spline" />
+                            </chart:Chart.Series>
+                            <chart:Chart.ChartAreas>
+                                <chart:ChartArea x:Name="rotationArea1" />
+                            </chart:Chart.ChartAreas>
+                        </chart:Chart>
+                    </WindowsFormsHost>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Row="4" >
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Grid.Row="4" Style="{StaticResource graphBorder}" BorderBrush="#FF901616" BorderThickness="2">
+                    <WindowsFormsHost Initialized="sp2_altitude_graph_initalized" >
+                        <chart:Chart x:Name="altitudeChart2" >
+                            <chart:Chart.Series >
+                                <chart:Series x:Name="sp2_altitude_points" ChartType="Spline"/>
+                            </chart:Chart.Series>
+                            <chart:Chart.ChartAreas>
+                                <chart:ChartArea  x:Name="altitudeArea2"  />
+                            </chart:Chart.ChartAreas>
+                        </chart:Chart>
+
+                    </WindowsFormsHost>
+                </Border>
+
+
+                <Border Grid.Column="1" Grid.Row="4" Style="{StaticResource graphBorder}" BorderBrush="#FF901616" BorderThickness="2">
+                    <WindowsFormsHost Initialized="sp2_temp_graph_initalized">
+                        <chart:Chart  x:Name="tempChart2"  >
+                            <chart:Chart.Series >
+                                <chart:Series x:Name="sp2_temp_points" ChartType="FastLine"/>
+                            </chart:Chart.Series>
+                            <chart:Chart.ChartAreas>
+                                <chart:ChartArea x:Name="tempArea2" />
+                            </chart:Chart.ChartAreas>
+                        </chart:Chart>
+
+
+                    </WindowsFormsHost>
+                </Border>
+
+                <Border Grid.Column="2" Grid.Row="4" Style="{StaticResource graphBorder}" BorderBrush="#FF901616" BorderThickness="2">
+                    <WindowsFormsHost Initialized="sp2_rotation_graph_initalized">
+                        <chart:Chart x:Name="rotationChart2" >
+                            <chart:Chart.Series >
+                                <chart:Series x:Name="sp2_rotation_points" ChartType="FastLine" />
+                            </chart:Chart.Series>
+                            <chart:Chart.ChartAreas>
+                                <chart:ChartArea x:Name="rotationArea2" />
+                            </chart:Chart.ChartAreas>
+                        </chart:Chart>
+                    </WindowsFormsHost>
+                </Border>
+            </Grid>
+        </Grid>
+
+        <Border Grid.Column="2"
+                BorderThickness="4"
+                BorderBrush="MediumVioletRed"
+                MaxHeight="400"
+                VerticalAlignment="Bottom" MinHeight="300">
+            <WindowsFormsHost>
+                <gmaps:GMapControl x:Name="mapView" Load="Map_Loaded"/>
+            </WindowsFormsHost>
+        </Border>
+        
+        
+    </Grid>
+</Window>

@@ -1,0 +1,368 @@
+﻿<Window x:Class="_2022MuyGroundStation.Window2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:aforge ="clr-namespace:AForge.Controls;assembly=AForge.Controls"
+        xmlns:model="http://helix-toolkit.org/wpf"
+        xmlns:wfi ="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+        xmlns:gmaps="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
+        xmlns:chart="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization" 
+        xmlns:local="clr-namespace:_2022MuyGroundStation"
+        mc:Ignorable="d"
+        
+        Title="Window2"  Height="1080" Width="1920" 
+    WindowStartupLocation="CenterScreen" WindowState="Maximized" Background="#FFC5C5C5"
+    Loaded="WindowLoaded" Closed="ProgramClosed" AllowDrop="True"
+    MouseLeftButtonDown="DropVideo" Drop="DropVideoToMedia" ShowInTaskbar="True" ResizeMode="NoResize" IsTabStop="True" WindowStyle="None">
+    <Grid Margin="0,0,0,0" Visibility="Visible" IsHitTestVisible="True" Background="#FF111010">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+
+            <Image Source="images/TaliaLogo.png" MinWidth="100" MinHeight="150"
+                   MaxWidth="250" MaxHeight="400"  HorizontalAlignment="Left" 
+                   VerticalAlignment="Top">
+                <Image.RenderTransform>
+                    <RotateTransform x:Name="AnimatedRotateTransform" Angle="0" />
+                </Image.RenderTransform>
+                <Image.Effect>
+                    <DropShadowEffect Direction="225" Color="#FFB6C2CB" ShadowDepth="10" BlurRadius="14" />
+                </Image.Effect>
+
+                <!--<Image.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard>
+                            <Storyboard RepeatBehavior="Forever">
+                                <DoubleAnimation Storyboard.TargetName="AnimatedRotateTransform" 
+                                                 Storyboard.TargetProperty="Angle" 
+                                                 By="0"        
+                                                 To="360" 
+                                                 Duration="0:0:3" 
+                                                 FillBehavior="Stop" >
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseInOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Image.Triggers>-->
+            </Image>
+
+            <TextBlock x:Name="serverConneciton"
+                      HorizontalAlignment="Center" 
+                      Margin="0 0 0 70"
+                      FontSize="25"
+                      MinHeight="10"
+                      MinWidth="150"
+                      FontWeight="Bold"
+                      VerticalAlignment="Bottom"
+                      Foreground="White"
+                      IsHitTestVisible="False"
+                      TextAlignment="Center"
+                      >GROUND STATION</TextBlock>
+
+            <TextBlock x:Name="currentDate"
+                      HorizontalAlignment="Center" 
+                      Margin="0 0 0 40"
+                      FontSize="25"
+                      MinHeight="10"
+                      MinWidth="150"
+                      FontWeight="Bold"
+                      VerticalAlignment="Bottom"
+                      Foreground="White"
+                      IsHitTestVisible="False"
+                      TextAlignment="Center"
+                      >28.03.2022</TextBlock>
+
+            <TextBlock x:Name="currentTime"
+                      HorizontalAlignment="Center" 
+                      Margin="0 0 0 10"
+                      FontSize="25"
+                      MinHeight="10"
+                      MinWidth="150"
+                      FontWeight="Bold"
+                      VerticalAlignment="Bottom"
+                      Foreground="White"
+                      IsHitTestVisible="False"
+                      TextAlignment="Center"
+                       
+                      >21.22.01</TextBlock>
+
+            <Grid Grid.Row="1">
+
+                <Label VerticalAlignment="Top" HorizontalAlignment="Center" 
+                       FontSize="20" Foreground="#FFE8A514" FontWeight="Black" >TELEMETRY</Label>
+                <Border BorderThickness="5" BorderBrush="#FFFFEE00" 
+                        CornerRadius="30" Margin="0 0 0 0"
+                        HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="35,0,35,0">
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >TAKIM NO: 65789</TextBlock>
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >PAKET NUMARASI: 10000</TextBlock>
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >GÖNDERME SAATİ: 10000</TextBlock>
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >BASINÇ1: 10000</TextBlock>
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >BASINÇ2: 10000</TextBlock>
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >YÜKSEKLİK1: 10000</TextBlock>
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >YÜKSEKLİK2: 10000</TextBlock>
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >İRTİFA FARKI: 10000</TextBlock>
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >İNİŞ HIZI: 10000</TextBlock>
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >SICKALIK: 10000</TextBlock>
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >PİL GERİLİMİ: 10000</TextBlock>
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >GPS1 LATITUDE: 10000</TextBlock>
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >GPS1 ALTITUDE: 10000</TextBlock>
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >GPS1 LONGITUDE: 10000</TextBlock>
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >GPS2 LATITUDE: 10000</TextBlock>
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >GPS2 ALTITUDE: 10000</TextBlock>
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >GPS2 LONGITUDE: 10000</TextBlock>
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >PITCH: 10000</TextBlock>
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >ROLL: 10000</TextBlock>
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >YAW: 10000</TextBlock>
+                        <TextBlock Style="{StaticResource TelemetryLabels}" >VİDEO AKTARIM BİLGİSİ: 10000</TextBlock>
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+
+        </Grid>
+        <Grid  Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="6*"/>
+
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Column="1">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0"
+                Style="{StaticResource mapBorder}">
+                    <gmaps:GMapControl x:Name="mapView"  MinHeight="400" Initialized="MapInitilazed" >
+
+                    </gmaps:GMapControl>
+                </Border>
+
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Column="1" Grid.Row="0" Style="{StaticResource graphBorder}" >
+                        <WindowsFormsHost Initialized="voltGraphInitlazed" Background="#1f1e1d">
+                            <chart:Chart x:Name="voltChart" BackColor="#1f1e1d" >
+                                <chart:Chart.Series >
+                                    <chart:Series x:Name="voltPoints" ChartType="FastLine" />
+                                </chart:Chart.Series>
+                                <chart:Chart.ChartAreas>
+                                    <chart:ChartArea x:Name="voltArea" >
+
+                                    </chart:ChartArea>
+                                </chart:Chart.ChartAreas>
+                            </chart:Chart>
+                        </WindowsFormsHost>
+                    </Border>
+
+                    <Border Grid.Column="2" Grid.Row="1" Style="{StaticResource graphBorder}">
+                        <WindowsFormsHost Initialized="tempGraphInitilazed"  Background="#1f1e1d" >
+                            <chart:Chart x:Name="tempChart" BackColor="#1f1e1d">
+                                <chart:Chart.Series >
+                                    <chart:Series x:Name="tempPoints" ChartType="Spline"/>
+                                </chart:Chart.Series>
+                                <chart:Chart.ChartAreas>
+                                    <chart:ChartArea  x:Name="tempArea"  />
+                                </chart:Chart.ChartAreas>
+                            </chart:Chart>
+
+                        </WindowsFormsHost>
+                    </Border>
+
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Button x:Name="startConnectionBtn" Grid.Column="0"
+                            Style="{StaticResource controlButtons}"
+                            Background="#FF071229"
+                            Click="startConnection_Click">BAĞLANTIYI BAŞLAT</Button>
+                    <Button x:Name="stopConnectionBtn" Grid.Column="1"
+                            Style="{StaticResource controlButtons}"
+                            Background="#FF552147"
+                            Click="stopConnection_Click" Content="BAĞLANTIYI DURDUR"/>
+                    <Button  x:Name="sendVideoBtn" Grid.Column="2"
+                            Style="{StaticResource controlButtons}"
+                            Background="#FFBA20C1"
+                            Click="sendVideo_Click">VİDEO GÖNDER</Button>
+                    <Button  x:Name="sendVideo" Grid.Column="3"
+                            Style="{StaticResource controlButtons}"
+                            Background="#FF7458CB"
+                            Click="sendVideo_Click">SİS KAPSÜLÜ</Button>
+
+                    <Button x:Name="seperatePayload" Grid.Column="0" Grid.Row="1" 
+                            Style="{StaticResource controlButtons}" 
+                            Background="#FF185061"
+                            Click="seperatePayload_Click">AYRILMAYI GERÇEKLEŞTİR</Button>
+                    <Button x:Name="openBuzzer" Grid.Column="1" Grid.Row="1" 
+                            Style="{StaticResource controlButtons}" 
+                            Background="#FFD34C0B"
+                            Click="sendVideo_Click">MANUAL TAHRİK</Button>
+                    <Button x:Name="sendVideo1" Grid.Column="2" Grid.Row="1" 
+                            Style="{StaticResource controlButtons}" 
+                            Background="#FF9C151E"
+                            Click="sendVideo_Click">VİDEO GÖSTER</Button>
+                    <Button x:Name="sendVideo2" Grid.Column="3" Grid.Row="1" 
+                            Style="{StaticResource controlButtons}" 
+                            Background="#FF48862C"
+                            Click="sendVideo_Click">TEST</Button>
+                </Grid>
+                <Border Grid.Column="2" Grid.Row="1" Style="{StaticResource graphBorder}">
+                    <WindowsFormsHost Initialized="motionGraphInitilazed" Background="#1f1e1d" >
+                        <chart:Chart x:Name="motionChart" BackColor="#1f1e1d">
+                            <chart:Chart.ChartAreas>
+                                <chart:ChartArea  x:Name="motionArea"  />
+                            </chart:Chart.ChartAreas>
+                        </chart:Chart>
+
+                    </WindowsFormsHost>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Row="2" >
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" BorderBrush="#083763" BorderThickness="5"
+                        CornerRadius="2" Margin="4 4 4 4" 
+                
+                VerticalAlignment="Stretch"
+                >
+                    <wfi:WindowsFormsHost >
+                        <!--<aforge:VideoSourcePlayer x:Name="videoPlayer" />-->
+                        <aforge:PictureBox x:Name="pictureBox"></aforge:PictureBox>
+                    </wfi:WindowsFormsHost>
+
+                </Border>
+
+                <Border Grid.Column="1" 
+                        BorderBrush="#083763" BorderThickness="5"
+                        CornerRadius="2" Margin="4 4 4 4"
+                        >
+                    <model:HelixViewport3D x:Name="modelSatellite3D"
+                                       Initialized="ModelInitilazed"    
+                                       IsHitTestVisible="False" 
+                                       Foreground="DarkRed"
+                                       Background="CornflowerBlue">
+                        <ModelVisual3D x:Name="modelVisual3D">
+                        </ModelVisual3D>
+                    </model:HelixViewport3D>
+                </Border>
+            </Grid>
+
+        </Grid>
+
+
+
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Style="{StaticResource graphBorder}" >
+                <WindowsFormsHost Initialized="speedGraphInitilazed"  Background="#1f1e1d">
+                    <chart:Chart  x:Name="speedChart" BackColor="#1f1e1d">
+                        <chart:Chart.Series >
+                            <chart:Series x:Name="speedPoints" ChartType="FastLine"/>
+                        </chart:Chart.Series>
+                        <chart:Chart.ChartAreas>
+                            <chart:ChartArea x:Name="speedArea" />
+                        </chart:Chart.ChartAreas>
+                    </chart:Chart>
+
+
+                </WindowsFormsHost>
+            </Border>
+
+            <Border Grid.Row="1" Style="{StaticResource graphBorder}">
+                <WindowsFormsHost Initialized="pressure1GraphInitalized"  Background="#1f1e1d">
+                    <chart:Chart  x:Name="pressure1Chart" BackColor="#1f1e1d">
+                        <chart:Chart.Series >
+                            <chart:Series x:Name="pressure1Points" ChartType="Spline"/>
+                        </chart:Chart.Series>
+                        <chart:Chart.ChartAreas>
+                            <chart:ChartArea  x:Name="pressure1Area" />
+                        </chart:Chart.ChartAreas>
+                    </chart:Chart>
+
+                </WindowsFormsHost>
+            </Border>
+
+            <Border Grid.Row="2" Style="{StaticResource graphBorder}">
+                <WindowsFormsHost Initialized="pressure2GraphInitalized" Background="#1f1e1d" >
+                    <chart:Chart  x:Name="pressure2Chart"  BackColor="#1f1e1d">
+                        <chart:Chart.Series >
+                            <chart:Series x:Name="pressure2Points" ChartType="Spline"/>
+                        </chart:Chart.Series>
+                        <chart:Chart.ChartAreas>
+                            <chart:ChartArea x:Name="pressure2Area" />
+                        </chart:Chart.ChartAreas>
+                    </chart:Chart>
+                </WindowsFormsHost>
+            </Border>
+
+
+            <Border Grid.Row="3" Style="{StaticResource graphBorder}">
+                <WindowsFormsHost Initialized="heightGraphInitilazed"  Background="#1f1e1d">
+                    <chart:Chart  x:Name="heightChart" BackColor="#1f1e1d">
+                        <chart:Chart.ChartAreas>
+                            <chart:ChartArea x:Name="heightArea" />
+                        </chart:Chart.ChartAreas>
+                    </chart:Chart>
+                </WindowsFormsHost>
+            </Border>
+
+        </Grid>
+
+
+    </Grid>
+</Window>
